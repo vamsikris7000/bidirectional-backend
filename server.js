@@ -9,6 +9,14 @@ if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
 
+// Debug: Log all environment variables (for troubleshooting)
+console.log('🔍 Environment Debug:');
+console.log('   NODE_ENV:', process.env.NODE_ENV);
+console.log('   PORT:', process.env.PORT);
+console.log('   All env vars with DIFY:', Object.keys(process.env).filter(key => key.includes('DIFY')));
+console.log('   All env vars with CHATWOOT:', Object.keys(process.env).filter(key => key.includes('CHATWOOT')));
+console.log('   Total env vars:', Object.keys(process.env).length);
+
 const app = express();
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
@@ -88,9 +96,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
-// Dify API configuration
-const DIFY_API_URL = process.env.DIFY_API_URL;
-const DEFAULT_API_KEY = process.env.DIFY_API_KEY;
+// Dify API configuration with fallbacks
+const DIFY_API_URL = process.env.DIFY_API_URL || 'https://d22yt2oewbcglh.cloudfront.net/v1';
+const DEFAULT_API_KEY = process.env.DIFY_API_KEY || 'app-dStnyyOE9dNP6CZb0lPg3kKF';
 
 // Validate Dify configuration
 if (!DIFY_API_URL || !DEFAULT_API_KEY) {
@@ -102,12 +110,12 @@ if (!DIFY_API_URL || !DEFAULT_API_KEY) {
     process.exit(1);
 }
 
-// Chatwoot configuration (will be fetched dynamically from Dify API)
+// Chatwoot configuration with fallbacks
 let CHATWOOT_CONFIG = {
-    url: process.env.CHATWOOT_URL,
-    api_access_token: process.env.CHATWOOT_API_KEY,
-    account_id: process.env.CHATWOOT_ACCOUNT_ID,
-    inbox_id: process.env.CHATWOOT_INBOX_ID,
+    url: process.env.CHATWOOT_URL || 'https://d1o0hms5bruuwu.cloudfront.net',
+    api_access_token: process.env.CHATWOOT_API_KEY || '9Kp7ao3inesMKXPs1KE7gJcu',
+    account_id: process.env.CHATWOOT_ACCOUNT_ID || '1',
+    inbox_id: process.env.CHATWOOT_INBOX_ID || '1',
     auth_type: 'api_key' // Use API key authentication
 };
 
