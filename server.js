@@ -713,7 +713,7 @@ app.post('/api/chat', async (req, res) => {
         console.log('📤 Sending to Dify API:', {
             query,
             inputs,
-            response_mode: 'blocking',
+            response_mode: 'streaming',
             user,
             conversation_id: conversation_id || '',
             files,
@@ -725,7 +725,7 @@ app.post('/api/chat', async (req, res) => {
         const requestData = {
             query,
             inputs,
-            response_mode: 'blocking',
+            response_mode: 'streaming',
             user,
             conversation_id,
             files,
