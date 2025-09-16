@@ -94,9 +94,11 @@ const DEFAULT_API_KEY = process.env.DIFY_API_KEY;
 
 // Validate Dify configuration
 if (!DIFY_API_URL || !DEFAULT_API_KEY) {
-    console.error('❌ Missing required Dify environment variables in .env file:');
+    console.error('❌ Missing required Dify environment variables:');
     console.error('   DIFY_API_URL:', DIFY_API_URL || 'MISSING');
     console.error('   DIFY_API_KEY:', DEFAULT_API_KEY ? '[SET]' : 'MISSING');
+    console.error('   NODE_ENV:', process.env.NODE_ENV);
+    console.error('   Available env vars:', Object.keys(process.env).filter(key => key.includes('DIFY') || key.includes('CHATWOOT')));
     process.exit(1);
 }
 
@@ -111,11 +113,13 @@ let CHATWOOT_CONFIG = {
 
 // Validate that required environment variables are set
 if (!CHATWOOT_CONFIG.url || !CHATWOOT_CONFIG.api_access_token || !CHATWOOT_CONFIG.account_id || !CHATWOOT_CONFIG.inbox_id) {
-    console.error('❌ Missing required Chatwoot environment variables in .env file:');
+    console.error('❌ Missing required Chatwoot environment variables:');
     console.error('   CHATWOOT_URL:', CHATWOOT_CONFIG.url || 'MISSING');
     console.error('   CHATWOOT_API_KEY:', CHATWOOT_CONFIG.api_access_token ? '[SET]' : 'MISSING');
     console.error('   CHATWOOT_ACCOUNT_ID:', CHATWOOT_CONFIG.account_id || 'MISSING');
     console.error('   CHATWOOT_INBOX_ID:', CHATWOOT_CONFIG.inbox_id || 'MISSING');
+    console.error('   NODE_ENV:', process.env.NODE_ENV);
+    console.error('   Available env vars:', Object.keys(process.env).filter(key => key.includes('DIFY') || key.includes('CHATWOOT')));
     process.exit(1);
 }
 
