@@ -1223,7 +1223,7 @@ app.post('/api/sms-whatsapp/send', async (req, res) => {
 });
 
 // Start the server with WebSocket support
-server.listen(PORT, () => {
+server.listen(PORT, '0.0.0.0', () => {
     console.log(`🚀 Server running on port ${PORT}`);
     console.log(`🔌 WebSocket server ready for real-time messaging`);
     console.log(`🌐 Frontend URL: http://localhost:${PORT}`);
