@@ -107,7 +107,8 @@ if (!DIFY_API_URL || !DEFAULT_API_KEY) {
     console.error('   DIFY_API_KEY:', DEFAULT_API_KEY ? '[SET]' : 'MISSING');
     console.error('   NODE_ENV:', process.env.NODE_ENV);
     console.error('   Available env vars:', Object.keys(process.env).filter(key => key.includes('DIFY') || key.includes('CHATWOOT')));
-    process.exit(1);
+    console.error('   Using fallback values...');
+    // Don't exit, use fallback values
 }
 
 // Chatwoot configuration with fallbacks
@@ -128,7 +129,8 @@ if (!CHATWOOT_CONFIG.url || !CHATWOOT_CONFIG.api_access_token || !CHATWOOT_CONFI
     console.error('   CHATWOOT_INBOX_ID:', CHATWOOT_CONFIG.inbox_id || 'MISSING');
     console.error('   NODE_ENV:', process.env.NODE_ENV);
     console.error('   Available env vars:', Object.keys(process.env).filter(key => key.includes('DIFY') || key.includes('CHATWOOT')));
-    process.exit(1);
+    console.error('   Using fallback values...');
+    // Don't exit, use fallback values
 }
 
 // Fetch Chatwoot configuration from Dify API
