@@ -3,7 +3,11 @@ const cors = require('cors');
 const axios = require('axios');
 const http = require('http');
 const WebSocket = require('ws');
-require('dotenv').config();
+
+// Load environment variables (works with both .env file and Railway environment variables)
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
 
 const app = express();
 const server = http.createServer(app);
